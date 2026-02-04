@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+html,body{
+  margin:0;
+  background:black;
+  overflow:hidden;
+}
+#gif{
+  width:100vw;
+  height:100vh;
+  object-fit:cover;
+}
+</style>
+</head>
+
+<body>
+
+<img id="gif" src="ghost.gif">
+
+<audio id="a" preload="auto" autoplay playsinline>
+  <source src="scream.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const a = document.getElementById("a");
+
+function play(){
+  a.play().catch(()=>{});
+}
+
+/* multi attempt */
+play();
+setTimeout(play,200);
+setTimeout(play,800);
+
+/* mobile fallback */
+document.addEventListener("touchstart", play, {once:true});
+document.addEventListener("click", play, {once:true});
+
+/* fullscreen try */
+setTimeout(()=>{
+  const e=document.documentElement;
+  if(e.requestFullscreen) e.requestFullscreen().catch(()=>{});
+},300);
+</script>
+
+</body>
+</html>
